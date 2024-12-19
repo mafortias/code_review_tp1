@@ -57,11 +57,20 @@ public class AwesomePasswordChecker {
         return instance;
     }
 
+    /**
+     * Private constructor for the AwesomePasswordChecker class
+     * which initializes the cluster centers by reading a CSV file from the InputStream.
+     * 
+     * Each line in the file is expected to represent a cluster center.
+     * The values are parsed (as doubles) and saved in the clusterCenters collection. 
+     * @param input : The InputStream from which the CSV file will be read.
+     *                  Each line should represent a cluster center as a list of numeric values.
+     * @throws IOException if an Input/Output error occurs while reading the file.     */
     private AwesomePasswordChecker(InputStream input) throws IOException {
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(input))) {
             String line;
             while ((line = buffer.readLine()) != null) {
-                String[] values = line.split(";");
+                String[] values = line.split(",");
                 double[] center = new double[values.length];
 
                 for (int i = 0; i < values.length; ++i) {
@@ -265,7 +274,6 @@ public class AwesomePasswordChecker {
             h1[3] += d1;
         }
 
-        // Step 5: Output
         ByteBuffer md5Buffer = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN);
         md5Buffer.putInt(h1[0]).putInt(h1[1]).putInt(h1[2]).putInt(h1[3]);
         byte[] md5Bytes = md5Buffer.array();
@@ -276,5 +284,17 @@ public class AwesomePasswordChecker {
         }
 
         return md5Hex.toString();
+    }
+    
+    public static void main(String[] argv){
+        System.out.println("oui");
+        System.out.println(computeMd5("romainaznar"));
+        try{
+            AwesomePasswordChecker a = AwesomePasswordChecker.getInstance();
+            System.out.println(a.getDistance("romainaznar"));
+        }catch(IOException e){
+            System.out.println("erreur");
+        }
+       
     }
 }

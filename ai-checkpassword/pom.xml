@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.isima.zz2.f5</groupId>
-    <artifactId>ai-checkpassword</artifactId>
+    <artifactId>ai-passwordchecker</artifactId> <!-- Changé de ai-checkpassword à ai-passwordchecker -->
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
@@ -12,10 +12,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <start-class>fr.isima.zz2.f5.ai.checkpassword.AwesomePasswordChecker</start-class>
     
         <!-- Define dependencies versions -->
-        <redscan-utils.version>1.0.0</redscan-utils.version>
-        <log4j2.version>2.17.1</log4j2.version>
+        <ai-passwordchecker.version>1.0.0</ai-passwordchecker.version> <!-- Changé de ai-checkpassword.version à ai-passwordchecker.version -->
         
         <!-- Define test dependencies versions -->
         
@@ -41,12 +42,6 @@
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        
-        <dependency>
-            <groupId>red.deddobifu</groupId>
-            <artifactId>redscan-utils</artifactId>
-            <version>${redscan-utils.version}</version>
         </dependency>
 
         <!-- Dependencies for logging -->
@@ -98,6 +93,23 @@
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>
+            </plugin>
+
+            <!-- Exec Maven Plugin for running main class -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>${start-class}</mainClass> <!-- Utilisation de la propriété start-class -->
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>    
