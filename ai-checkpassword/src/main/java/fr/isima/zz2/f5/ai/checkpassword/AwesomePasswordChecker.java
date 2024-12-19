@@ -176,9 +176,8 @@ public class AwesomePasswordChecker {
     private double euclideanDistance(int[] vectorA, double[] vectorB) {
         double sum = 0;
         for (int i = 0; i < vectorA.length; i++) {
-            sum += (vectorA[i] - vectorB[i]) * (vectorA[i] + vectorB[i]);
+            sum += Math.pow(vectorA[i] - vectorB[i], 2);
         }
-
         return Math.sqrt(sum);
     }
 
@@ -287,7 +286,6 @@ public class AwesomePasswordChecker {
     }
     
     public static void main(String[] argv){
-        System.out.println("oui");
         System.out.println(computeMd5("romainaznar"));
         try{
             AwesomePasswordChecker a = AwesomePasswordChecker.getInstance();
@@ -295,6 +293,5 @@ public class AwesomePasswordChecker {
         }catch(IOException e){
             System.out.println("erreur");
         }
-       
     }
 }
