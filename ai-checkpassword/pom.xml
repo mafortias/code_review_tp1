@@ -71,7 +71,21 @@
         </dependency>
         <!-- End of dependencies for logging -->
         
-        <!-- Custom dependencies -->
+        <!-- Dépendances tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+            <version>5.11.4</version>
+            <type>jar</type>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         
         <!-- End of Custom dependencies -->
     </dependencies>
@@ -93,6 +107,14 @@
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>
+            </plugin>
+            
+            
+            <!-- Plugin jacoco-->
+            <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+              <version>0.8.13-SNAPSHOT</version>
             </plugin>
 
             <!-- Exec Maven Plugin for running main class -->
