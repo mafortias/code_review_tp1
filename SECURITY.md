@@ -29,11 +29,12 @@ To learn more about ai-checkpassword's security service level agreements (SLAs) 
 - **Release Schedule:** Updates are made available as vulnerabilities are resolved. ai-checkpassword works closely with enterprise customers to ensure timely updates that align with their operational needs.
 - **Version Support:** ai-checkpassword may provide security support for multiple versions, depending on the terms of the enterprise agreement.
 
-## Apache 2.0 License Users
+## Attribution-NonCommercial 4.0 International License Users
 
-- **Security SLA:** ai-checkpassword does not provide a formal SLA for security issues under the Apache 2.0 License.
+- **Security SLA:** ai-checkpassword does not provide a formal SLA for security issues under the Attribution-NonCommercial 4.0 International License.
 - **Release Schedule:** Releases prioritize new functionality and include fixes for known security vulnerabilities at the time of release. While major releases typically occur one to two times per year, ai-checkpassword does not guarantee a fixed release schedule.
 - **Version Support:** Security patches are only provided for the latest release version.
+
 
 Reporting a Vulnerability
 
