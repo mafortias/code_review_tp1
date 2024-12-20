@@ -1,0 +1,77 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [main, develop, cicd]
+  pull_request:
+    branches: [main, develop, cicd]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Run Checkstyle
+        working-directory: ./ai-checkpassword
+        run: mvn checkstyle:check
+
+      - name: Build with Maven
+        working-directory: ./ai-checkpassword
+        run: mvn -B package --file pom.xml
+
+      - name: Run Unit Tests
+        working-directory: ./ai-checkpassword
+        run: mvn test
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+
+
+  semgrep_scan:
+    name: Semgrep CI
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+    if: (github.actor != 'dependabot[bot]')
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Perform Semgrep Analysis
+        run: semgrep scan -q --sarif --config auto ./ai-checkpassword/src/main/java > semgrep-results.sarif
+
+      - name: Save SARIF results as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: semgrep-scan-results
+          path: semgrep-results.sarif
+
+      - name: Upload SARIF result to the GitHub Security Dashboard
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep-results.sarif
+        if: always()
