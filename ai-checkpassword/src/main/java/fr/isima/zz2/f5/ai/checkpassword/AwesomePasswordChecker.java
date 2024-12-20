@@ -58,9 +58,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Private constructor for the AwesomePasswordChecker class
-     * which initializes the cluster centers by reading a CSV file from the InputStream.
-     * 
+     * Private constructor for the AwesomePasswordChecker class which initializes the cluster centers by reading a CSV file from the InputStream.
      * Each line in the file is expected to represent a cluster center.
      * The values are parsed (as doubles) and saved in the clusterCenters collection. 
      * @param input : The InputStream from which the CSV file will be read.
@@ -284,13 +282,26 @@ public class AwesomePasswordChecker {
 
         return md5Hex.toString();
     }
-    
-    public static void main(String[] argv){
+
+    /**
+     * The main entry point of the application.
+     * <p>
+     * This method performs the following actions:
+     * <ul>
+     *     <li>Computes the MD5 hash of a given string.</li>
+     *     <li>Uses an instance of {@code AwesomePasswordChecker} to compute the "distance" 
+     *     of a given string (based on the logic implemented in {@code AwesomePasswordChecker}).</li>
+     *     <li>Handles input/output exceptions.</li>
+     * </ul>
+     *</p>
+    * @param argv command-line arguments (not used in this method).
+    */
+    public static void main(String[] argv) {
         System.out.println(computeMd5("romainaznar"));
-        try{
-            AwesomePasswordChecker a = AwesomePasswordChecker.getInstance();
-            System.out.println(a.getDistance("romainaznar"));
-        }catch(IOException e){
+        try {
+            AwesomePasswordChecker test = AwesomePasswordChecker.getInstance();
+            System.out.println(test.getDistance("romainaznar"));
+        } catch (IOException e) {
             System.out.println("erreur");
         }
     }
