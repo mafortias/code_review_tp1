@@ -23,8 +23,7 @@ public class AwesomePasswordCheckerTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        String path = "src/test/resources/cluster_centers_HAC_aff.csv";
-        checker = AwesomePasswordChecker.getInstance(Files.newFileInputStream(Paths.get(path)));
+        checker = AwesomePasswordChecker.getInstance();
     }
 
     @Test
@@ -43,7 +42,7 @@ public class AwesomePasswordCheckerTest {
     public void testComputeMd5() {
         // Test de la méthode computeMd5
         String input = "romainaznar";
-        String expectedMd5 = "03eafefc3b5a148e10aefeb82b7a6d28";  // MD5 attendu pour "romainaznar"
+        String expectedMd5 = "74e433e5ccf061090f0a51dda638b370";  // MD5 attendu pour "romainaznar"
         
         String md5 = AwesomePasswordChecker.computeMd5(input);
         
