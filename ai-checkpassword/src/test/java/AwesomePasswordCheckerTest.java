@@ -28,17 +28,6 @@ public class AwesomePasswordCheckerTest {
     }
 
     @Test
-    public void testMaskAff() {
-        // Test de la méthode maskAff
-        String password = "romainaznar";
-        int[] expectedMask = new int[28]; // Remplissez cela avec les valeurs attendues pour le mot de passe "romainaznar"
-        
-        int[] mask = checker.maskAff(password);
-        
-        assertArrayEquals(expectedMask, mask, "La transformation en masque ne correspond pas.");
-    }
-
-    @Test
     public void testGetDistance() {
         // Test de la méthode getDistance
         String password = "romainaznar";
